@@ -1,0 +1,27 @@
+{{!< default}}
+
+<main class="gh-main oa-tag-main">
+
+    {{!-- Tag filter pills --}}
+    {{> "components/tag-filter-pills"}}
+
+    {{!-- Post grid --}}
+    <div class="oa-sections">
+        {{#if posts}}
+        <div class="oa-card-grid oa-blog-grid">
+            {{#foreach posts}}
+            {{> "components/oa-post-card"}}
+            {{/foreach}}
+        </div>
+        {{else}}
+        <p class="oa-no-posts">No posts found in this category yet.</p>
+        {{/if}}
+
+        {{#if pagination}}
+        <div class="oa-pagination">
+            {{pagination}}
+        </div>
+        {{/if}}
+    </div>
+
+</main>

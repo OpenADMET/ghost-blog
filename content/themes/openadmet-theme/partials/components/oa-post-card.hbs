@@ -1,0 +1,21 @@
+<article class="oa-card">
+    <div class="oa-card-body">
+        <div class="oa-card-meta">
+            {{#primary_tag}}<span class="oa-card-tag-label">{{name}}</span> · {{/primary_tag}}{{date published_at format="MMMM D, YYYY"}}
+        </div>
+        <h3 class="oa-card-title"><a href="{{url}}">{{title}}</a></h3>
+        <a href="{{url}}" class="oa-card-image-link">
+            {{#if feature_image}}
+            <img class="oa-card-image" src="{{feature_image}}" alt="{{title}}">
+            {{else}}
+            <div class="oa-card-image oa-card-image--fallback">
+                <img src="/content/images/brand/oADMET-color-2lines.png" alt="OpenADMET">
+            </div>
+            {{/if}}
+        </a>
+        <p class="oa-card-excerpt">{{excerpt words="25"}}</p>
+    </div>
+    <div class="oa-card-footer">
+        <a href="{{url}}" class="oa-btn oa-btn-sm">Read More</a>
+    </div>
+</article>

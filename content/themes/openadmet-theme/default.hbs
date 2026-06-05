@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="{{@site.locale}}">
+<head>
+
+    {{!-- Basic meta - advanced meta is output with {{ghost_head}} below --}}
+    <title>{{meta_title page=(t " (Page %)")}}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    {{!-- Preload main styles and scripts for better performance --}}
+    <link rel="preload" as="style" href="{{asset "built/screen.css"}}">
+    <link rel="preload" as="script" href="{{asset "built/source.js"}}">
+    
+    {{!-- Fonts are preloaded and defined in the default template to avoid layout shift --}}
+    {{> "typography/fonts"}}
+
+    {{!-- Theme assets - use the {{asset}} helper to reference styles & scripts, this will take care of caching and cache-busting automatically --}}
+    <link rel="stylesheet" type="text/css" href="{{asset "built/screen.css"}}">
+
+    {{!-- Custom background color --}}
+    <style>
+        :root {
+            --background-color: {{@custom.site_background_color}}
+        }
+    </style>
+
+    {{!-- OpenADMET brand styles --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* OpenADMET Brand Overrides */
+        :root {
+            --color-openadmet-red: #c0392b;
+            --color-openadmet-red-dark: #a93226;
+            --color-openadmet-dark: #212529;
+            --font-sans: "Nunito Sans", Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            font-family: "Nunito Sans", Helvetica, Arial, sans-serif !important;
+            color: #585858;
+            font-size: 22px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: "Abril Fatface", "Times New Roman", Times, serif !important;
+            color: #000;
+        }
+
+        /* Sticky navbar */
+        .gh-navigation {
+            background-color: #212529 !important;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .gh-navigation a,
+        .gh-navigation-brand,
+        .gh-navigation-brand span,
+        .gh-navigation-list a {
+            color: #fff !important;
+        }
+
+        .gh-navigation a:hover {
+            color: rgba(255,255,255,0.75) !important;
+            opacity: 1;
+        }
+
+        /* Keep navigation actions background matching the dark nav */
+        .gh-navigation-actions {
+            background-color: #212529 !important;
+        }
+
+        /* White search icon and burger lines */
+        .gh-search {
+            color: #fff !important;
+        }
+        .gh-burger-box .gh-burger-inner,
+        .gh-burger-box .gh-burger-inner::before,
+        .gh-burger-box .gh-burger-inner::after {
+            background-color: #fff;
+        }
+
+        /* Red pill buttons */
+        .gh-btn-primary,
+        .gh-subscribe-btn,
+        .kg-signup-card-btn,
+        .gh-portal-close-button {
+            background-color: #c0392b !important;
+            border-color: #c0392b !important;
+            border-radius: 999px !important;
+            color: #fff !important;
+            font-weight: 600;
+        }
+
+        .gh-btn-primary:hover,
+        .gh-subscribe-btn:hover {
+            background-color: #a93226 !important;
+            border-color: #a93226 !important;
+        }
+
+        /* Links */
+        a { color: #c0392b; }
+        a:hover { color: #a93226; }
+
+        /* Remove default Ghost content wrapper padding on homepage */
+        .home-template .gh-main { padding: 0 !important; }
+
+        /* Dark footer */
+        .gh-foot {
+            background-color: #212529 !important;
+            color: #fff;
+            padding: 0 2rem !important;
+        }
+        .gh-foot-inner { display: flex; align-items: center; min-height: 80px; }
+        .gh-foot-logo { display: flex; align-items: center; }
+
+        .gh-foot,
+        .gh-foot a,
+        .gh-foot p,
+        .gh-foot h4,
+        .gh-foot span,
+        .gh-footer-bar,
+        .gh-footer-bar a {
+            color: rgba(255,255,255,0.85) !important;
+        }
+
+        .gh-foot a:hover,
+        .gh-footer-bar a:hover {
+            color: #fff !important;
+        }
+
+        .gh-footer-bar {
+            background-color: #1a1e21 !important;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Tags */
+        .gh-card-tag { color: #c0392b; font-weight: 600; }
+
+        /* Post card hover */
+        .gh-card:hover .gh-card-title { color: #c0392b; }
+
+        /* =====================================================
+           Homepage Layout — Option C
+        ===================================================== */
+        .oa-hero { background-color: #495057; color: #fff; padding: 0; width: 100%; box-sizing: border-box; }
+        .oa-hero-inner { width: 100%; max-width: 1200px; margin: 0 auto; display: flex; flex-direction: row; align-items: stretch; min-height: 340px; }
+        .oa-hero-image { flex: 0 0 48%; overflow: hidden; }
+        .oa-hero-image img { width: 100%; height: 100%; min-height: 300px; object-fit: cover; display: block; }
+        .oa-hero-content { flex: 1; padding: 2.5rem 2.5rem 2.5rem 3rem; display: flex; flex-direction: column; justify-content: center; }
+        .oa-hero-content--full { flex: 1; padding: 3rem; }
+        .oa-hero-title { font-family: "Abril Fatface", serif !important; font-size: 3.4rem; color: #fff !important; margin: 0.75rem 0; line-height: 1.15; }
+        .oa-hero-title a { color: #fff !important; text-decoration: none; }
+        .oa-hero-title a:hover { color: rgba(255,255,255,0.8) !important; }
+        .oa-hero-excerpt { color: rgba(255,255,255,0.8); font-size: 1.5rem; line-height: 1.65; margin-bottom: 1.25rem; }
+        .oa-hero-meta { font-size: 1.2rem; color: rgba(255,255,255,0.55); margin-bottom: 1.5rem; }
+        .oa-hero-label { font-size: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.45); margin: 0 0 0.4rem; }
+        .oa-tag-pill { display: inline-block; background-color: #c0392b; color: #fff; font-size: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; padding: 0.3rem 0.9rem; border-radius: 999px; margin-bottom: 0.5rem; }
+        .oa-meta-sep { margin: 0 0.4rem; opacity: 0.5; }
+        .oa-btn { display: inline-block; background-color: #c0392b; color: #fff !important; border: 2px solid #c0392b; border-radius: 999px; padding: 0.65rem 1.6rem; font-weight: 600; font-size: 1.2rem; text-decoration: none; transition: background-color 0.15s ease; cursor: pointer; }
+        .oa-btn:hover { background-color: #a93226; border-color: #a93226; color: #fff !important; }
+        .oa-btn-sm { padding: 0.6rem 1.4rem; font-size: 1.3rem; }
+        .oa-btn-outline { display: inline-block; background-color: #c0392b; color: #fff !important; border: 2px solid #c0392b; border-radius: 999px; padding: 0.6rem 1.6rem; font-weight: 600; font-size: 1.15rem; text-decoration: none; transition: all 0.15s ease; }
+        .oa-btn-outline:hover { background-color: #a93226; border-color: #a93226; color: #fff !important; }
+        .oa-sections { background-color: #fff; }
+        .oa-section { padding: 3rem 0; background-color: #fff; }
+        .oa-section--alt { background-color: #f8f9fa; }
+        .oa-section-header { max-width: 1200px; margin: 0 auto 0; padding: 0 2rem; }
+        .oa-section-header h2 { font-family: "Abril Fatface", serif !important; font-size: 2rem; color: #fff !important; background-color: #212529; display: inline-block; padding: 0.7rem 1.6rem; border-radius: 1rem 1rem 0 0; margin: 0; }
+        .oa-section-header::after { content: ""; display: block; width: 120px; height: 6px; background-color: #c0392b; border-radius: 999px; margin: 0 2rem 1.5rem; }
+        .oa-card-grid { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        .oa-card { background: #fff; border-radius: 1rem; box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.075); overflow: hidden; display: flex; flex-direction: column; transition: box-shadow 0.2s ease, transform 0.2s ease; border: 0; height: 100%; }
+        .oa-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.13); transform: translateY(-3px); }
+        .oa-card-image-link { display: block; margin-bottom: 0; }
+        .oa-card-image { width: 100%; height: 200px; object-fit: contain; display: block; border-radius: 0.5rem; margin-bottom: 1rem; background-color: #f8f9fa; }
+        .oa-card-image--fallback { width: 100%; height: 200px; background-color: #f8f9fa; display: flex; align-items: center; justify-content: center; border-radius: 0.5rem; margin-bottom: 1rem; }
+        .oa-card-image--fallback img { height: 70px; width: auto; object-fit: contain; opacity: 0.85; display: block; margin: 0 auto; }
+        .oa-card-image--logo { width: 100%; height: 200px; background-color: #f8f9fa; display: flex !important; align-items: center; justify-content: center; border-radius: 0.5rem; margin-bottom: 1rem; padding: 1.5rem; box-sizing: border-box; }
+        .oa-card-image--logo img { max-width: 80%; max-height: 120px; width: auto; height: auto; object-fit: contain; display: block; }
+        .oa-hero-fallback-img { object-fit: contain !important; background-color: #1a1e21; padding: 3rem; }
+        .oa-card-body { padding: 1.5rem; display: flex; flex-direction: column; flex-grow: 1; }
+        .oa-card-title { font-family: "Abril Fatface", "Times New Roman", Times, serif !important; font-size: 2.2rem; color: #000 !important; margin: 0 0 0.75rem; line-height: 1.2; font-weight: 500; }
+        .oa-card-title a { color: #000 !important; text-decoration: none; }
+        .oa-card-title a:hover { color: #c0392b !important; }
+        .oa-card-excerpt { font-size: 1.4rem; color: #212529; line-height: 1.6; margin-bottom: 0; font-weight: 400; flex-grow: 1; }
+        .oa-card-meta { font-size: 1.4rem; color: #6c757d; font-weight: 400; margin-bottom: 0.6rem; }
+        .oa-card-footer { padding: 0 1.5rem 1.5rem; }
+        .oa-section-more { max-width: 1200px; margin: 1.5rem auto 0; padding: 0 2rem; text-align: right; }
+        .oa-cta { background-color: #212529; color: #fff; padding: 3rem 0; text-align: center; }
+        .oa-cta-inner { max-width: 600px; margin: 0 auto; padding: 0 2rem; }
+        .oa-cta h2 { font-family: "Abril Fatface", serif !important; color: #fff !important; font-size: 2.6rem; margin-bottom: 0.75rem; }
+        .oa-cta p { color: rgba(255,255,255,0.75); margin-bottom: 1.5rem; font-size: 1.3rem; }
+        .oa-divider { width: 120px; height: 6px; background-color: #c0392b; border: none; border-radius: 999px; margin: 0 auto 1.5rem; }
+        .oa-subscribe-form { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; }
+        .oa-subscribe-input { flex: 1; min-width: 220px; border: 2px solid rgba(255,255,255,0.25); border-radius: 999px; background: rgba(255,255,255,0.1); color: #fff; padding: 0.55rem 1.25rem; font-size: 0.95rem; outline: none; }
+        .oa-subscribe-input:focus { border-color: #c0392b; }
+        .oa-subscribe-input::placeholder { color: rgba(255,255,255,0.45); }
+        @media (max-width: 900px) {
+            .oa-hero-inner { flex-direction: column; }
+            .oa-hero-image img { min-height: 220px; height: 220px; }
+            .oa-hero-content { padding: 2rem; }
+            .oa-card-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 600px) {
+            .oa-card-grid { grid-template-columns: 1fr; }
+            .oa-hero-title { font-size: 2.4rem; }
+            .oa-section-more { text-align: center; }
+        }
+
+        /* =====================================================
+           Blog filter pills
+        ===================================================== */
+        .oa-filter-bar { max-width: 1200px; margin: 2.5rem auto 0; padding: 0 2rem; display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+        .oa-filter-pill { display: inline-block; padding: 0.7rem 1.8rem; border-radius: 999px; border: 2px solid #c0392b; color: #c0392b !important; font-weight: 600; font-size: 1.6rem; text-decoration: none; transition: all 0.15s ease; }
+        .oa-filter-pill:hover { background-color: #c0392b; color: #fff !important; }
+        .oa-filter-pill--active { background-color: #c0392b; color: #fff !important; }
+
+        /* Tag label inside card */
+        .oa-card-tag-label { color: #c0392b; font-weight: 700; }
+
+        /* Extra padding for blog listing grid */
+        .oa-blog-grid { padding-top: 2rem; padding-bottom: 3rem; }
+
+        /* Remove default gh-main padding on tag pages */
+        .tag-template .gh-main { padding: 0 !important; }
+
+        /* Pagination */
+        .oa-pagination { max-width: 1200px; margin: 0 auto; padding: 0 2rem 3rem; }
+        .oa-pagination .pagination { display: flex; justify-content: center; align-items: center; gap: 1rem; flex-wrap: wrap; }
+        .oa-pagination .older-posts,
+        .oa-pagination .newer-posts { display: inline-block; padding: 0.45rem 1.2rem; border-radius: 999px; border: 2px solid #c0392b; color: #c0392b !important; font-weight: 600; font-size: 1.1rem; text-decoration: none; transition: all 0.15s ease; }
+        .oa-pagination .older-posts:hover,
+        .oa-pagination .newer-posts:hover { background-color: #c0392b; color: #fff !important; }
+        .oa-pagination .page-number { font-size: 1.1rem; color: #6c757d; }
+
+        /* Empty state */
+        .oa-no-posts { max-width: 1200px; margin: 3rem auto; padding: 0 2rem; color: #6c757d; font-size: 1.3rem; }
+    </style>
+
+    <script>
+        /* The script for calculating the color contrast has been taken from
+        https://gomakethings.com/dynamically-changing-the-text-color-based-on-background-color-contrast-with-vanilla-js/ */
+        var accentColor = getComputedStyle(document.documentElement).getPropertyValue('--background-color');
+        accentColor = accentColor.trim().slice(1);
+
+        if (accentColor.length === 3) {
+            accentColor = accentColor[0] + accentColor[0] + accentColor[1] + accentColor[1] + accentColor[2] + accentColor[2];
+        }
+
+        var r = parseInt(accentColor.substr(0, 2), 16);
+        var g = parseInt(accentColor.substr(2, 2), 16);
+        var b = parseInt(accentColor.substr(4, 2), 16);
+        var yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+        var textColor = (yiq >= 128) ? 'dark' : 'light';
+
+        document.documentElement.className = `has-${textColor}-text`;
+    </script>
+
+    {{!-- This tag outputs all your advanced SEO meta, structured data, and other important settings, it should always be the last tag before the closing head tag --}}
+    {{ghost_head}}
+
+</head>
+<body class="{{body_class}} has-{{#match @custom.title_font "Elegant serif"}}serif{{else match @custom.title_font "Consistent mono"}}mono{{else}}sans{{/match}}-title has-{{#match @custom.body_font "Elegant serif"}}serif{{else}}sans{{/match}}-body">
+
+<div class="gh-viewport">
+    
+    {{> "components/navigation" navigationLayout=@custom.navigation_layout}}
+
+    {{{body}}}
+    
+    {{> "components/footer"}}
+    
+</div>
+
+{{#is "post, page"}}
+    {{> "lightbox"}}
+{{/is}}
+
+{{!-- Scripts - handle responsive videos, infinite scroll, and navigation dropdowns --}}
+<script src="{{asset "built/source.js"}}"></script>
+
+{{!-- Ghost outputs required functional scripts with this tag, it should always be the last thing before the closing body tag --}}
+{{ghost_foot}}
+
+</body>
+</html>

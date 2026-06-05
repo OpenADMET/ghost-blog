@@ -1,0 +1,20 @@
+<div class="oa-filter-bar">
+    <a href="/" class="oa-filter-pill" data-tag="">All</a>
+    <a href="/tag/blind-challenges/" class="oa-filter-pill" data-tag="blind-challenges">Blind Challenges</a>
+    <a href="/tag/models/" class="oa-filter-pill" data-tag="models">Models</a>
+    <a href="/tag/data/" class="oa-filter-pill" data-tag="data">Data</a>
+    <a href="/tag/infrastructure/" class="oa-filter-pill" data-tag="infrastructure">Infrastructure</a>
+</div>
+<script>
+(function() {
+    var path = window.location.pathname;
+    document.querySelectorAll('.oa-filter-pill').forEach(function(pill) {
+        var tag = pill.dataset.tag;
+        if (tag === '' && /^\/(page\/\d+\/)?$/.test(path)) {
+            pill.classList.add('oa-filter-pill--active');
+        } else if (tag && path.indexOf('/tag/' + tag + '/') !== -1) {
+            pill.classList.add('oa-filter-pill--active');
+        }
+    });
+})();
+</script>

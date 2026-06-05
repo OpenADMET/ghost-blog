@@ -1,0 +1,624 @@
+/* OpenADMET Custom Theme Styles
+/* Matches the design of openadmet.org
+/* ---------------------------------------------------------- */
+
+/* 1. Google Fonts
+/* ---------------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Nunito+Sans:wght@400;600;700&display=swap');
+
+/* 2. Variable Overrides
+/* ---------------------------------------------------------- */
+:root {
+    /* Brand colors */
+    --color-openadmet-red: #c0392b;
+    --color-openadmet-red-dark: #a93226;
+    --color-openadmet-black: #000000;
+    --color-openadmet-dark: #212529;
+    --color-openadmet-dark-hover: #343a40;
+    --color-openadmet-body: #585858;
+    --color-openadmet-light-bg: #f8f9fa;
+
+    /* Override Source theme fonts */
+    --font-sans: "Nunito Sans", Helvetica, Arial, sans-serif;
+    --font-serif: "Abril Fatface", "Times New Roman", Times, serif;
+
+    /* Override accent to match Ghost's accent color system */
+    --ghost-accent-color: #c0392b;
+}
+
+/* 3. Global Typography
+/* ---------------------------------------------------------- */
+body {
+    font-family: "Nunito Sans", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    color: #585858;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Abril Fatface", "Times New Roman", Times, serif;
+    font-weight: 500;
+    color: #000;
+}
+
+/* 4. Navigation — Black sticky bar
+/* ---------------------------------------------------------- */
+.gh-navigation {
+    background-color: #212529 !important;
+    border-bottom: none;
+}
+
+.gh-navigation.has-accent-color {
+    background-color: #212529 !important;
+}
+
+.gh-navigation-brand .gh-navigation-logo,
+.gh-navigation-brand span {
+    color: #fff !important;
+    font-family: "Nunito Sans", Helvetica, Arial, sans-serif;
+    font-weight: 700;
+}
+
+.gh-navigation-list a,
+.gh-navigation-menu a {
+    color: rgba(255, 255, 255, 0.85) !important;
+}
+
+.gh-navigation-list a:hover,
+.gh-navigation-menu a:hover {
+    color: #fff !important;
+    opacity: 1;
+}
+
+/* Mobile menu */
+.gh-burger-box .gh-burger-inner,
+.gh-burger-box .gh-burger-inner::before,
+.gh-burger-box .gh-burger-inner::after {
+    background-color: #fff;
+}
+
+/* Search icon */
+.gh-search-icon {
+    color: #fff !important;
+}
+
+/* 5. Buttons — Red pill style
+/* ---------------------------------------------------------- */
+.gh-btn,
+.gh-btn-primary,
+.kg-signup-card-btn,
+.gh-portal-close-button {
+    background-color: var(--color-openadmet-red) !important;
+    border-color: var(--color-openadmet-red) !important;
+    color: #fff !important;
+    border-radius: 999px !important;
+    font-weight: 600;
+    font-family: "Nunito Sans", Helvetica, Arial, sans-serif;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.gh-btn:hover,
+.gh-btn-primary:hover,
+.kg-signup-card-btn:hover {
+    background-color: var(--color-openadmet-red-dark) !important;
+    border-color: var(--color-openadmet-red-dark) !important;
+    color: #fff !important;
+}
+
+/* Read more / post card buttons */
+.gh-card-link:hover {
+    opacity: 1;
+    color: var(--color-openadmet-red);
+}
+
+/* 6. Section Divider — Red pill shape
+/* ---------------------------------------------------------- */
+.gh-content h2::after,
+.section-divider {
+    content: "";
+    display: block;
+    width: 120px;
+    height: 10px;
+    background-color: var(--color-openadmet-red);
+    border: none;
+    border-radius: 999px;
+    margin: 1.5rem auto;
+}
+
+/* 7. Post Cards
+/* ---------------------------------------------------------- */
+.gh-card {
+    border-radius: 1rem;
+    overflow: hidden;
+    border: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.gh-card:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.14);
+    transform: translateY(-2px);
+}
+
+.gh-card-title {
+    font-family: "Abril Fatface", "Times New Roman", Times, serif;
+    color: #000;
+}
+
+/* Tag pills on cards */
+.gh-card-tag {
+    color: var(--color-openadmet-red);
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* 8. Header / Hero
+/* ---------------------------------------------------------- */
+.gh-header {
+    background-color: #212529;
+    color: #fff;
+}
+
+.gh-header .gh-header-title,
+.gh-header h1 {
+    font-family: "Abril Fatface", "Times New Roman", Times, serif;
+    color: #fff;
+}
+
+/* 9. Accent / Featured elements
+/* ---------------------------------------------------------- */
+a {
+    color: var(--color-openadmet-red);
+}
+
+a:hover {
+    color: var(--color-openadmet-red-dark);
+}
+
+/* Post reading progress bar */
+.gh-progress-container {
+    background-color: var(--color-openadmet-red);
+}
+
+/* Tags */
+.gh-tag {
+    background-color: var(--color-openadmet-light-bg);
+    color: var(--color-openadmet-red);
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.8rem;
+}
+
+.gh-tag:hover {
+    background-color: var(--color-openadmet-red);
+    color: #fff;
+}
+
+/* 10. Footer — Dark with white text
+/* ---------------------------------------------------------- */
+.gh-footer {
+    background-color: #212529 !important;
+    color: #fff;
+}
+
+.gh-footer * {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.gh-footer a {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.gh-footer a:hover {
+    color: #fff;
+}
+
+.gh-footer .gh-footer-brand {
+    color: #fff !important;
+    font-weight: 700;
+}
+
+.gh-footer-bar {
+    background-color: #1a1e21;
+    color: rgba(255, 255, 255, 0.5);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.gh-footer-bar a {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.gh-footer-bar a:hover {
+    color: #fff;
+}
+
+/* 11. CTA / Subscribe section
+/* ---------------------------------------------------------- */
+.gh-cta {
+    background-color: #212529;
+    color: #fff;
+}
+
+.gh-cta h2,
+.gh-cta p {
+    color: #fff;
+}
+
+.gh-cta .gh-btn {
+    background-color: var(--color-openadmet-red) !important;
+    border-radius: 999px !important;
+}
+
+/* Email input in subscribe forms */
+.gh-subscribe-input {
+    border-radius: 999px;
+    border: 2px solid rgba(255,255,255,0.3);
+    background: transparent;
+    color: #fff;
+    padding: 0.5rem 1.2rem;
+}
+
+.gh-subscribe-input:focus {
+    border-color: var(--color-openadmet-red);
+    outline: none;
+}
+
+/* 12. Post / Article
+/* ---------------------------------------------------------- */
+.gh-article-title {
+    font-family: "Abril Fatface", "Times New Roman", Times, serif;
+}
+
+.gh-article-meta {
+    color: #888;
+    font-size: 0.9rem;
+}
+
+/* Author byline */
+.gh-author-name {
+    color: #000;
+    font-weight: 700;
+}
+
+/* 13. Pagination
+/* ---------------------------------------------------------- */
+.gh-pagination a {
+    border-radius: 999px;
+    border: 2px solid var(--color-openadmet-red);
+    color: var(--color-openadmet-red);
+    font-weight: 600;
+    padding: 0.5rem 1.5rem;
+    transition: all 0.15s ease;
+}
+
+.gh-pagination a:hover {
+    background-color: var(--color-openadmet-red);
+    color: #fff;
+}
+
+/* 14. Code blocks
+/* ---------------------------------------------------------- */
+pre, code {
+    font-family: "JetBrains Mono", Menlo, Consolas, Monaco, monospace;
+}
+
+/* 15. Responsive
+/* ---------------------------------------------------------- */
+@media (max-width: 768px) {
+    .gh-navigation {
+        padding: 0.5rem 1rem;
+    }
+}
+
+/* =====================================================
+   Homepage Layout — Option C
+   Featured hero + tag-based card sections
+   ===================================================== */
+
+/* Hero */
+.oa-hero {
+    background-color: #212529;
+    color: #fff;
+    padding: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+.oa-hero-inner {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    min-height: 340px;
+    box-sizing: border-box;
+}
+.oa-hero-image {
+    flex: 0 0 48%;
+    overflow: hidden;
+}
+.oa-hero-image img {
+    width: 100%;
+    height: 100%;
+    min-height: 300px;
+    object-fit: cover;
+    display: block;
+}
+.oa-hero-content {
+    flex: 1;
+    padding: 2.5rem 2.5rem 2.5rem 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+}
+.oa-hero-content--full {
+    flex: 1;
+    padding: 3rem 3rem;
+    text-align: left;
+}
+.oa-hero-title {
+    font-family: "Abril Fatface", serif !important;
+    font-size: 2.2rem;
+    color: #fff !important;
+    margin: 0.75rem 0;
+    line-height: 1.2;
+}
+.oa-hero-title a {
+    color: #fff !important;
+    text-decoration: none;
+}
+.oa-hero-title a:hover { color: rgba(255,255,255,0.85) !important; }
+.oa-hero-excerpt {
+    color: rgba(255,255,255,0.8);
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+}
+.oa-hero-meta {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 1.5rem;
+}
+
+/* Tag pill */
+.oa-tag-pill {
+    display: inline-block;
+    background-color: #c0392b;
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    margin-bottom: 0.5rem;
+}
+
+/* Buttons */
+.oa-btn {
+    display: inline-block;
+    background-color: #c0392b;
+    color: #fff !important;
+    border: 2px solid #c0392b;
+    border-radius: 999px;
+    padding: 0.55rem 1.4rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+    cursor: pointer;
+}
+.oa-btn:hover {
+    background-color: #a93226;
+    border-color: #a93226;
+    color: #fff !important;
+}
+.oa-btn-sm {
+    padding: 0.4rem 1rem;
+    font-size: 0.85rem;
+}
+.oa-btn-outline {
+    display: inline-block;
+    background-color: transparent;
+    color: #c0392b !important;
+    border: 2px solid #c0392b;
+    border-radius: 999px;
+    padding: 0.5rem 1.4rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: all 0.15s ease;
+}
+.oa-btn-outline:hover {
+    background-color: #c0392b;
+    color: #fff !important;
+}
+
+/* Meta separator */
+.oa-meta-sep { margin: 0 0.4rem; opacity: 0.5; }
+
+/* Sections container */
+.oa-sections { background-color: #fff; }
+
+/* Individual section */
+.oa-section {
+    padding: 3rem 0;
+    background-color: #fff;
+}
+.oa-section--alt {
+    background-color: #f8f9fa;
+}
+.oa-section-header {
+    max-width: 1200px;
+    margin: 0 auto 0.5rem;
+    padding: 0 2rem;
+}
+.oa-section-header h2 {
+    font-family: "Abril Fatface", serif !important;
+    font-size: 1.5rem;
+    color: #fff !important;
+    background-color: #212529;
+    display: inline-block;
+    padding: 0.6rem 1.4rem;
+    border-radius: 1rem 1rem 0 0;
+    margin: 0;
+}
+
+/* Red pill divider under section header */
+.oa-section-header::after {
+    content: "";
+    display: block;
+    width: 120px;
+    height: 6px;
+    background-color: #c0392b;
+    border-radius: 999px;
+    margin: 0.5rem 2rem 1.5rem;
+}
+
+/* Card grid */
+.oa-card-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+.oa-card {
+    background: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.oa-card:hover {
+    box-shadow: 0 6px 20px rgba(0,0,0,0.13);
+    transform: translateY(-3px);
+}
+.oa-card-image-link { display: block; }
+.oa-card-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+}
+.oa-card-image--logo {
+    width: 100%;
+    height: 180px;
+    background-color: #f8f9fa;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    padding-top: 1.5rem;
+    box-sizing: border-box;
+}
+.oa-card-image--logo img {
+    max-width: 60%;
+    max-height: 100px;
+    object-fit: contain;
+}
+
+.oa-card-body {
+    padding: 1.25rem 1.25rem 0.5rem;
+    flex-grow: 1;
+}
+.oa-card-title {
+    font-family: "Abril Fatface", serif !important;
+    font-size: 1.1rem;
+    color: #000 !important;
+    margin: 0 0 0.5rem;
+    line-height: 1.3;
+}
+.oa-card-title a {
+    color: #000 !important;
+    text-decoration: none;
+}
+.oa-card-title a:hover { color: #c0392b !important; }
+.oa-card-excerpt {
+    font-size: 0.9rem;
+    color: #585858;
+    line-height: 1.55;
+    margin-bottom: 0.75rem;
+}
+.oa-card-meta {
+    font-size: 0.8rem;
+    color: #999;
+    margin-bottom: 0.5rem;
+}
+.oa-card-footer {
+    padding: 0.75rem 1.25rem 1.25rem;
+}
+
+/* "View all" row */
+.oa-section-more {
+    max-width: 1200px;
+    margin: 1.5rem auto 0;
+    padding: 0 2rem;
+    text-align: right;
+}
+
+/* Subscribe CTA */
+.oa-cta {
+    background-color: #212529;
+    color: #fff;
+    padding: 3rem 0;
+    text-align: center;
+}
+.oa-cta-inner {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+.oa-cta h2 {
+    font-family: "Abril Fatface", serif !important;
+    color: #fff !important;
+    font-size: 1.8rem;
+    margin-bottom: 0.75rem;
+}
+.oa-cta p { color: rgba(255,255,255,0.75); margin-bottom: 1.5rem; }
+.oa-divider {
+    width: 120px;
+    height: 6px;
+    background-color: #c0392b;
+    border: none;
+    border-radius: 999px;
+    margin: 0 auto 1.5rem;
+}
+.oa-subscribe-form {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.oa-subscribe-input {
+    flex: 1;
+    min-width: 220px;
+    border: 2px solid rgba(255,255,255,0.25);
+    border-radius: 999px;
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+    padding: 0.55rem 1.25rem;
+    font-size: 0.95rem;
+    outline: none;
+}
+.oa-subscribe-input:focus { border-color: #c0392b; }
+.oa-subscribe-input::placeholder { color: rgba(255,255,255,0.45); }
+
+/* Responsive */
+@media (max-width: 900px) {
+    .oa-hero-inner { flex-direction: column; }
+    .oa-hero-image { flex: 0 0 auto; }
+    .oa-hero-image img { min-height: 220px; height: 220px; }
+    .oa-hero-content { padding: 2rem; }
+    .oa-card-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+    .oa-card-grid { grid-template-columns: 1fr; }
+    .oa-hero-title { font-size: 1.7rem; }
+    .oa-section-more { text-align: center; }
+}

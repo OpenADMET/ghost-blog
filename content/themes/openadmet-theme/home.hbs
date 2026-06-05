@@ -1,0 +1,65 @@
+{{!< default}}
+
+{{!-- Hero: Latest post --}}
+{{#get "posts" limit="1" include="tags,authors"}}
+    {{#foreach posts}}
+    <section class="oa-hero">
+        <div class="oa-hero-inner">
+            <div class="oa-hero-image">
+                {{#if feature_image}}
+                <img src="{{feature_image}}" alt="{{title}}">
+                {{else}}
+                <img src="/content/images/brand/oADMET-color-2lines.png" alt="OpenADMET" class="oa-hero-fallback-img">
+                {{/if}}
+            </div>
+            <div class="oa-hero-content">
+                <p class="oa-hero-label">Our latest post</p>
+                {{#primary_tag}}<span class="oa-tag-pill">{{name}}</span>{{/primary_tag}}
+                <h1 class="oa-hero-title"><a href="{{url}}">{{title}}</a></h1>
+                {{#if custom_excerpt}}
+                    <p class="oa-hero-excerpt">{{custom_excerpt}}</p>
+                {{else}}
+                    <p class="oa-hero-excerpt">{{excerpt words="30"}}</p>
+                {{/if}}
+                <div class="oa-hero-meta">
+                    <span>By {{primary_author.name}}</span>
+                    <span class="oa-meta-sep">·</span>
+                    <span>{{date published_at format="DD MMM YYYY"}}</span>
+                    <span class="oa-meta-sep">·</span>
+                    <span>{{reading_time}}</span>
+                </div>
+                <a href="{{url}}" class="oa-btn">Read more →</a>
+            </div>
+        </div>
+    </section>
+    {{/foreach}}
+{{/get}}
+
+{{!-- Tag filter pills --}}
+{{> "components/tag-filter-pills"}}
+
+{{!-- Chronological post grid --}}
+<div class="oa-sections">
+    {{#get "posts" limit="all" include="tags,authors"}}
+    <div class="oa-card-grid oa-blog-grid">
+        {{#foreach posts}}
+        {{> "components/oa-post-card"}}
+        {{/foreach}}
+    </div>
+    {{/get}}
+</div>
+
+{{!-- Subscribe CTA --}}
+<section class="oa-cta">
+    <div class="oa-cta-inner">
+        <hr class="oa-divider">
+        <h2>Stay up to date with OpenADMET</h2>
+        <p>Get the latest on blind challenges, models, and data delivered to your inbox.</p>
+        {{#unless @member}}
+        <form class="oa-subscribe-form" data-members-form="subscribe">
+            <input class="oa-subscribe-input" type="email" name="email" placeholder="Your email address" required>
+            <button class="oa-btn" type="submit">Subscribe</button>
+        </form>
+        {{/unless}}
+    </div>
+</section>
