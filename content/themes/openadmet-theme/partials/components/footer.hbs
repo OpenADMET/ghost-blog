@@ -9,3 +9,33 @@
         </span>
     </div>
 </footer>
+
+<div class="gh-footer-bar gh-outer">
+    <div class="gh-inner">
+        <p class="gh-license" xmlns:cc="http://creativecommons.org/ns#">
+            © {{date format="YYYY"}} <a href="{{@site.url}}" rel="cc:attributionURL">{{@site.title}}</a>
+            · Content licensed <a href="https://creativecommons.org/licenses/by/4.0/" rel="license noopener" target="_blank">CC BY 4.0</a>
+        </p>
+    </div>
+</div>
+
+<style>
+    .gh-footer-bar { padding: 0.8rem 2rem; }
+    .gh-footer-bar .gh-license {
+        margin: 0;
+        text-align: center;
+        font-size: 1.1rem;
+        line-height: 1.5;
+        letter-spacing: 0.02em;
+        color: rgba(255,255,255,0.42) !important;
+    }
+    .gh-footer-bar .gh-license a {
+        color: rgba(255,255,255,0.6) !important;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(255,255,255,0.18);
+    }
+    .gh-footer-bar .gh-license a:hover {
+        color: #fff !important;
+        border-bottom-color: rgba(255,255,255,0.5);
+    }
+</style>
