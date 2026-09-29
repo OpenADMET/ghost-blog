@@ -1,54 +1,54 @@
-# Local Development Setup
+# Contributing
+
+This repo holds the OpenADMET Ghost theme (`content/themes/openadmet-theme/`) and shared site content such as `content/settings/routes.yaml` and brand images. Ghost itself is not committed; install it locally as below.
 
 ## Prerequisites
 
-- [Node.js](https://nodejs.org/) v18 or v20
+- [Node.js](https://nodejs.org/) v22 (required by the theme's build tooling)
 - [Ghost CLI](https://ghost.org/docs/ghost-cli/): `npm install -g ghost-cli`
 
-## Getting Started
+## Local Development Setup
 
-1. **Clone the repo and navigate into it**
+1. **Install Ghost in a separate folder**
    ```bash
-   git clone <repo-url>
-   cd openadmet-ghost
+   mkdir ~/ghost-local && cd ~/ghost-local
+   ghost install local
    ```
+   The site runs at [http://localhost:2368](http://localhost:2368), with the admin panel at [http://localhost:2368/ghost](http://localhost:2368/ghost).
 
-2. **Update the config with your local path**
-
-   Open `config.development.json` and update the `contentPath` and database `filename` to match where you cloned the repo:
-   ```json
-   "database": {
-     "connection": {
-       "filename": "/YOUR/LOCAL/PATH/openadmet-ghost/content/data/ghost-local.db"
-     }
-   },
-   "paths": {
-     "contentPath": "/YOUR/LOCAL/PATH/openadmet-ghost/content"
-   }
-   ```
-
-3. **Start Ghost**
+2. **Link the theme from this repo into Ghost**
    ```bash
-   ghost start
+   ln -s /path/to/ghost-blog/content/themes/openadmet-theme ~/ghost-local/content/themes/openadmet-theme
+   ghost restart
    ```
+   Then activate **openadmet-theme** in Ghost Admin → Settings → Design → Change theme.
 
-4. **View the site** at [http://localhost:2368](http://localhost:2368)
-
-   Admin panel: [http://localhost:2368/ghost](http://localhost:2368/ghost)
-
-5. **Stop Ghost**
-   ```bash
-   ghost stop
-   ```
+3. **Stop Ghost** with `ghost stop` (run from `~/ghost-local`).
 
 ## Making Theme Changes
 
-The theme lives in `content/themes/openadmet-theme/`. After editing:
+From `content/themes/openadmet-theme/`:
 
-1. Zip the theme (run from `content/themes/`):
+```bash
+npm ci            # once, to install build tools
+npx gulp          # rebuild assets on change and live-reload
+npx gulp build    # one-off build of assets/built/
+npx gscan .       # validate the theme against Ghost
+npx gulp zip      # write dist/openadmet-theme.zip
+```
+
+Commit the rebuilt `assets/built/` files with your change. CI rebuilds them on every pull request and fails if they are out of date, and it runs `gscan` to catch theme errors. Zips are build output and are not committed.
+
+## Releasing
+
+1. Bump `version` in `content/themes/openadmet-theme/package.json`.
+2. Add a `## X.Y.Z — YYYY-MM-DD` entry at the top of `content/themes/openadmet-theme/CHANGELOG.md`.
+3. Commit, then tag and push:
    ```bash
-   cd content/themes
-   zip -r openadmet-theme.zip openadmet-theme --exclude "openadmet-theme/node_modules/*" --exclude "*.DS_Store"
+   git tag -a openadmet-theme-vX.Y.Z -m "openadmet-theme X.Y.Z"
+   git push origin master openadmet-theme-vX.Y.Z
    ```
 
-2. Upload `openadmet-theme.zip` in Ghost Admin → Settings → Design → Theme.
+The **Theme release** workflow checks that the tag matches `package.json`, validates and zips the theme, and publishes a GitHub release with the zip attached and the CHANGELOG entry as notes. Upload that zip in Ghost Admin → Settings → Design → Theme.
+
+If the repo variable `GHOST_ADMIN_API_URL` and secret `GHOST_ADMIN_API_KEY` are set (from a Ghost Admin → Settings → Integrations custom integration), the workflow also uploads and activates the theme on that Ghost site automatically.
