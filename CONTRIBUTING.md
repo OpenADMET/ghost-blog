@@ -51,4 +51,4 @@ Commit the rebuilt `assets/built/` files with your change. CI rebuilds them on e
 
 The **Theme release** workflow checks that the tag matches `package.json`, validates and zips the theme, and publishes a GitHub release with the zip attached and the CHANGELOG entry as notes. Upload that zip in Ghost Admin → Settings → Design → Theme.
 
-If the repo variable `GHOST_ADMIN_API_URL` and secret `GHOST_ADMIN_API_KEY` are set (from a Ghost Admin → Settings → Integrations custom integration), the workflow also uploads and activates the theme on that Ghost site automatically.
+If the repo variable `GHOST_ADMIN_API_URL` and secret `GHOST_ADMIN_API_KEY` are set (from a Ghost Admin → Settings → Integrations custom integration), the workflow also uploads the zip to that Ghost site automatically. Because the theme keeps the same name, this replaces the live theme once it is active.
