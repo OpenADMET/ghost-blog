@@ -1,0 +1,55 @@
+name: Theme check
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - "content/themes/openadmet-theme/**"
+      - ".github/workflows/theme-check.yml"
+  pull_request:
+    paths:
+      - "content/themes/openadmet-theme/**"
+      - ".github/workflows/theme-check.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    working-directory: content/themes/openadmet-theme
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: content/themes/openadmet-theme/package-lock.json
+
+      - run: npm ci
+
+      - name: Build assets
+        run: npx gulp build
+
+      - name: Check built assets are committed
+        run: |
+          if ! git diff --exit-code --stat -- assets/built; then
+            echo "::error::assets/built is out of date. Run 'npx gulp build' in content/themes/openadmet-theme and commit the result."
+            exit 1
+          fi
+
+      - name: Validate theme with gscan
+        run: npx gscan --fatal --verbose .
+
+      - name: Build zip
+        run: npx gulp zip
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: openadmet-theme
+          path: content/themes/openadmet-theme/dist/openadmet-theme.zip

@@ -1,0 +1,16 @@
+# Local Ghost install (created by `ghost install local`)
+/versions/
+/current
+/content/themes/casper
+/content/themes/source
+
+# Local Ghost runtime data
+/content/data/
+/content/logs/
+
+# Theme build output
+node_modules/
+dist/
+*.zip
+
+.DS_Store
